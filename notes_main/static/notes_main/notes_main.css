@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: left;
+}
+
+.sidebar button.active {
+    background-color: #f0f0f0;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% - 200px); /* Размер контента = ширина экрана - ширина сайдбара */
+}
+
+.notes {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% - 200px); /* Размер заметок = ширина экрана - ширина сайдбара */
+}
+
+.note {
+    width: calc(50% - 20px);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.tags {
+    margin-top: 10px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.important {
+    background-color: #ffcccb;
+}
+
+.completed {
+    background-color: #90ee90;
+}
+
+.meta {
+    margin-top: 20px;
+}
+
+.friends {
+    width: 200px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.friends h2 {
+    margin-top: 0;
+}
+
+.friends button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.friends button:hover {
+    background-color: #555;
+}
+
+.friends ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.friends ul li {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    margin-left: 10px;
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.invite-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 15px;
+    margin-top: 20px;
+    background-color: #ff5e6c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+}
+
+.invite-btn:hover {
+    background-color: #e04152;
+}
+
+@media (max-width: 768px) {
+    .note {
+        width: calc(100% - 20px); /* Заметки на устройствах с шириной экрана менее 768px занимают всю ширину */
+        margin-right: 0;
+    }
+    .friends {
+        width: calc(100% - 20px); /* Друзья на устройствах с шириной экрана менее 768px занимают всю ширину */
+        margin-right: 0;
+    }
+}
+
