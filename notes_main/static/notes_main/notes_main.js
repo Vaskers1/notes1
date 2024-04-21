@@ -47,12 +47,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Функция для показа определенной заметки
     function showNotes(index, notePairs) {
+        const index_note = index * 2
         notes.forEach(function(note, i) {
-            if (i === index) {
+             if (i >= index_note && i <= index_note + 1) {
                 note.style.display = 'block'; // Показываем заметку с указанным индексом
-            } else {
-                note.style.display = 'none'; // Скрываем остальные заметки
-            }
+             } else {
+                 note.style.display = 'none'; // Скрываем остальные заметки
+             }
         });
     }
 
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
             prevButton.disabled = currentIndex === 0;
 
             // Проверяем, должна ли кнопка "вправо" быть активной
-            nextButton.disabled = currentIndex === notes.length - 1;
+            nextButton.disabled = currentIndex === Math.ceil(notes.length / 2) - 1;
         }
     }
 
@@ -85,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById('nextNote').addEventListener('click', function() {
         const notePairs = document.querySelectorAll('.note-pair');
-        if (currentIndex < notePairs.length - 1) {
+        if (currentIndex < notePairs.length / 2 - 1) {
             currentIndex++;
             showNotes(currentIndex, notePairs);
             togglePrevNextButtons();

@@ -40,18 +40,19 @@ main {
 
 .content {
     display: flex;
-    flex-wrap: wrap;
     width: calc(100% - 200px); /* Размер контента = ширина экрана - ширина сайдбара */
+    flex-direction: row;
 }
 
 .notes {
     display: flex;
     flex-wrap: wrap;
     width: calc(100% - 200px); /* Размер заметок = ширина экрана - ширина сайдбара */
+    flex-direction: row;
 }
 
 .note {
-    width: calc(50% - 20px);
+    width: 100%;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;

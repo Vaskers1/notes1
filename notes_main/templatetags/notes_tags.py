@@ -10,5 +10,7 @@ def get_notes():
 
 
 @register.simple_tag()
-def get_user():
-    return User.objects.all()
+def get_note_author(note_id):
+    note = Notes.objects.get(id=note_id)
+    return note.nickname
+

@@ -5,9 +5,9 @@ from django.db import models
 
 class User(models.Model):
     user_id = models.PositiveIntegerField(primary_key=True)
-    nickname = models.CharField(max_length=20, verbose_name='Имя пользователя')
+    nickname = models.CharField(max_length=20, verbose_name='Имя пользователя', unique=True)
     avatar = models.ImageField("Аватар пользователя", upload_to='users/images/')
-    email = models.EmailField(max_length=254, verbose_name='Имэйл')
+    email = models.EmailField(max_length=254, verbose_name='Имэйл', unique=True)
     friend_code = models.CharField(max_length=10, null=True, unique=True)
 
     def __str__(self):
@@ -19,7 +19,7 @@ class User(models.Model):
 
 
 class Group(models.Model):
-    group_name = models.CharField(max_length=100, verbose_name='Название группы')
+    group_name = models.CharField(max_length=100, verbose_name='Название группы', unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -47,6 +47,7 @@ class UserGroup(models.Model):
 
 class Notes(models.Model):
     completion_status = (
+        ('seen', 'Просмотрено'),
         ('in_progress', 'Принято в работу'),
         ('completed', 'Завершено'),
     )
@@ -61,9 +62,10 @@ class Notes(models.Model):
     note_text = models.TextField(max_length=9999999, verbose_name='Текст заметки')
     note_creation_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания заметки')
     note_refresh_date = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения заметки')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    completion_status_tag = models.CharField(choices=completion_status, verbose_name='Статус завершения')
-    importance_status_tag = models.CharField(choices=importance_status, verbose_name='Важность', null=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    completion_status_tag = models.CharField(choices=completion_status, verbose_name='Статус завершения', null=True)
+    importance_status_tag = models.CharField(choices=importance_status, verbose_name='Важность', blank=True, null=False)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Группа')
 
     def __str__(self):
         return self.note_title
