@@ -21,4 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('notes_main.urls', namespace = 'main')),
+    path('', include('notes_main.urls', namespace = 'personal-notes')),
+    path('', include('notes_main.urls', namespace = 'group-notes')),
 ]

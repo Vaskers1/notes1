@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class User(models.Model):
-    user_id = models.PositiveIntegerField(primary_key=True)
+    user_id = models.AutoField(primary_key=True)
     nickname = models.CharField(max_length=20, verbose_name='Имя пользователя', unique=True)
     avatar = models.ImageField("Аватар пользователя", upload_to='users/images/')
     email = models.EmailField(max_length=254, verbose_name='Имэйл', unique=True)
@@ -57,13 +57,13 @@ class Notes(models.Model):
         ('medium', 'В порядке очереди'),
         ('high', 'Требуется немедленное вмешательство'),
     )
-    note_id = models.PositiveIntegerField(primary_key=True)
+    note_id = models.AutoField(primary_key=True)
     note_title = models.CharField(max_length=150, verbose_name='Название заметки')
     note_text = models.TextField(max_length=9999999, verbose_name='Текст заметки')
     note_creation_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания заметки')
     note_refresh_date = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения заметки')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
-    completion_status_tag = models.CharField(choices=completion_status, verbose_name='Статус завершения', null=True)
+    completion_status_tag = models.CharField(choices=completion_status, verbose_name='Статус завершения', blank=True, null=True)
     importance_status_tag = models.CharField(choices=importance_status, verbose_name='Важность', blank=True, null=False)
     group = models.ForeignKey(Group, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Группа')
 

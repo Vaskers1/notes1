@@ -156,6 +156,7 @@ footer {
     background-color: #e04152;
 }
 
+
 @media (max-width: 768px) {
     .note {
         width: calc(100% - 20px); /* Заметки на устройствах с шириной экрана менее 768px занимают всю ширину */

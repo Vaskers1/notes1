@@ -1,0 +1,54 @@
+{% load static %}
+{% load notes_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заметки</title>
+    <link rel="stylesheet" href="{% static "/notes_main/notes_main.css" %}">
+</head>
+<body>
+    <header>
+        <h1>Мои заметки</h1>
+    </header>
+    <main>
+        <div class="sidebar">
+            <button id="myNotesBtn" class="active"><a href="{% url 'notes_main:personal_notes' %}">Мои заметки</a></button>
+            <button id="groupNotesBtn"><a href="{% url 'notes_main:group_notes' %}">Групповые заметки</a></button>
+            <button>Создать группу</button>
+            <button>Создать заметку</button>
+        </div>
+        {% if request.path == '/personal-notes/' %}
+            {% block personal_notes %}
+            {% endblock %}
+        {% endif %}
+        {% if request.path == '/group-notes/' %}
+            {% block group_notes %}
+            {% endblock %}
+        {% endif %}
+        <div class="friends">
+            <h2>Мои друзья</h2>
+            <ul>
+                <li>
+                    <span>Друг 1</span>
+                    <button class="invite-btn">Пригласить в группу</button>
+                </li>
+                <li>
+                    <span>Друг 2</span>
+                    <button class="invite-btn">Пригласить в группу</button>
+                </li>
+                <li>
+                    <span>Друг 3</span>
+                    <button class="invite-btn">Пригласить в группу</button>
+                </li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Заметки. Все права защищены.</p>
+    </footer>
+    <script src="{% static "notes_main/notes_main.js" %}"></script>
+</body>
+</html>

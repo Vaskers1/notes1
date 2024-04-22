@@ -95,4 +95,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // По умолчанию показываем личные заметки
     showPersonalNotes();
+
+    document.getElementById('personalNotesBtn').addEventListener('click', function() {
+        loadPersonalNotes();
+    });
+
+    document.getElementById('groupNotesBtn').addEventListener('click', function() {
+        loadGroupNotes();
+    });
+
+    function loadPersonalNotes() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                document.getElementById('personalNotesContent').innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "{% url 'notes_main:personal_notes' %}", true);
+        xhttp.send();
+    }
+
+    function loadGroupNotes() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                document.getElementById('groupNotesContent').innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "{% url 'notes_main:group_notes' %}", true);
+        xhttp.send();
+    }
 });
+
