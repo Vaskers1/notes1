@@ -1,5 +1,4 @@
 from django.db import models
-from users.models import User, Group
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -22,10 +21,8 @@ class Notes(models.Model):
     note_text = models.TextField(max_length=9999999, verbose_name='Текст заметки')
     note_creation_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания заметки')
     note_refresh_date = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения заметки')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
     completion_status_tag = models.CharField(choices=completion_status, verbose_name='Статус завершения', blank=True, null=True)
     importance_status_tag = models.CharField(choices=importance_status, verbose_name='Важность', blank=True, null=False)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Группа')
 
     def __str__(self):
         return self.note_title

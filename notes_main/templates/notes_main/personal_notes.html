@@ -1,6 +1,7 @@
 {% extends 'notes_main/base.html' %}
 {% load static %}
 {% load notes_tags %}
+{% load user_tags %}
 
 {% block personal_notes %}
 <div class="content">
@@ -20,7 +21,8 @@
                         <div class="meta">
                             <p>{{ note.note_creation_date }}</p>
                             <p>{{ note.note_refresh_date }}</p>
-                            <p>{{ users.nickname }}</p>
+                            {% get_users as users %}
+                                <p>{{ user.username }}</p>
                         </div>
                     </div>
                 </div>

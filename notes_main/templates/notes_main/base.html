@@ -16,8 +16,8 @@
         <div class="user-actions">
             {% get_users as users %}
             {% if user.is_authenticated %}
-                <p>Здравствуйте, {{ user.nickname }}</p>
-                <button class="login-btn">Выход</button>
+                <p>Здравствуйте, {{ user.username }}</p>
+                <button class="login-btn"><a href="{% url 'users:user_logout' %}">Выход</a></button>
             {% else %}
                 <button class="login-btn"><a href="{% url 'users:user_login' %}">Вход</a></button>
                 <button class="register-btn"><a href="{% url 'users:user_registration' %}">Регистрация</a></button>

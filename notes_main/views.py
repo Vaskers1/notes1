@@ -29,13 +29,9 @@ def note_creation(request):
             note_text = form.cleaned_data['note_text']
             completion_status_tag = form.cleaned_data['completion_status_tag']
             importance_status_tag = form.cleaned_data['importance_status_tag']
-            user = request.User.nickname
-            if isinstance(user, SimpleLazyObject):
-                user = user.wrapped
-            # Создание объекта Notes с введенными данными
             note = Notes.objects.create(note_title=note_title, note_text=note_text,
                                         completion_status_tag=completion_status_tag,
-                                        importance_status_tag=importance_status_tag, user=user)
+                                        importance_status_tag=importance_status_tag,)
             # Дополнительные действия, например, перенаправление на другую страницу
             return redirect('note-creation:note_creation')
     else:
