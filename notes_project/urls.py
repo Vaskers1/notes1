@@ -23,4 +23,7 @@ urlpatterns = [
     path('', include('notes_main.urls', namespace = 'main')),
     path('', include('notes_main.urls', namespace = 'personal-notes')),
     path('', include('notes_main.urls', namespace = 'group-notes')),
+    path('', include('notes_main.urls', namespace = 'note-creation')),
+    path('', include('users.urls', namespace = 'user_registration')),
+    path('', include('users.urls', namespace= 'user_login')),
 ]

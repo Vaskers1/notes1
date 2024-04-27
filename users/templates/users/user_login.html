@@ -1,0 +1,14 @@
+{% extends 'notes_main/base.html' %}
+{% load static %}
+
+
+{% block user_login %}
+<div class = 'content'>
+    <h2>Войти</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+    </form>
+</div>
+{% endblock %}

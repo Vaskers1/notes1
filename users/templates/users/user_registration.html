@@ -1,0 +1,11 @@
+{% extends 'notes_main/base.html' %}
+{% load static %}
+
+
+{% block user_registration %}
+    <form method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+{% endblock %}

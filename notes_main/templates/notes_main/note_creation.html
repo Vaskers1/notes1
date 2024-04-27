@@ -1,0 +1,35 @@
+{% extends 'notes_main/base.html' %}
+{% load static %}
+{% load notes_tags %}
+
+
+{% block note_creation %}
+    <div class="content">
+        <form class="note-form" method="post">
+            {% csrf_token %}
+            <div class="note">
+                <label>
+                    <input type="text" name="note_title" placeholder="Заголовок заметки" required>
+                </label>
+                <label>
+                    <textarea name="note_text" placeholder="Текст заметки" required></textarea>
+                </label>
+                <div class="tags">
+                    <label for="completion_status_tag">Статус выполнения:</label>
+                    <select name="completion_status_tag" id="completion_status_tag">
+                        {% for status_key, status_value in form.fields.completion_status_tag.choices %}
+                            <option value="{{ status_key }}">{{ status_value }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="importance_status_tag">Статус важности:</label>
+                    <select name="importance_status_tag" id="importance_status_tag">
+                        {% for status_key, status_value in form.fields.importance_status_tag.choices %}
+                            <option value="{{ status_key }}">{{ status_value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit">Создать заметку</button>
+        </form>
+    </div>
+{% endblock %}
