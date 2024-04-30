@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
+from users.models import Group
 
 User = get_user_model()
 
@@ -30,4 +31,9 @@ class UserLoginForm(AuthenticationForm):
     username = forms.CharField()
     password = forms.CharField()
 
+
+class GroupForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields = ['group_name']
 

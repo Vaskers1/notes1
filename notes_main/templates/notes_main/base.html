@@ -28,7 +28,7 @@
         <div class="sidebar">
             <button id="myNotesBtn" class="active"><a href="{% url 'notes_main:personal_notes' %}">Мои заметки</a></button>
             <button id="groupNotesBtn"><a href="{% url 'notes_main:group_notes' %}">Групповые заметки</a></button>
-            <button>Создать группу</button>
+            <button><a href="{% url 'users:group_creation' %}">Создать группу</a></button>
             <button><a href="{% url 'notes_main:note_creation' %}">Создать заметку</a></button>
         </div>
         {% if request.resolver_match.url_name == 'personal_notes' %}
@@ -49,6 +49,10 @@
         {% endif %}
         {% if request.resolver_match.url_name == 'user_login' %}
             {% block user_login %}
+            {% endblock %}
+        {% endif %}
+        {% if request.resolver_match.url_name == 'group_creation' %}
+            {% block group_creation %}
             {% endblock %}
         {% endif %}
         <div class="friends">

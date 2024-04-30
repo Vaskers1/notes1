@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.functional import SimpleLazyObject
 
@@ -29,9 +29,11 @@ def note_creation(request):
             note_text = form.cleaned_data['note_text']
             completion_status_tag = form.cleaned_data['completion_status_tag']
             importance_status_tag = form.cleaned_data['importance_status_tag']
+            user = request.user
             note = Notes.objects.create(note_title=note_title, note_text=note_text,
                                         completion_status_tag=completion_status_tag,
-                                        importance_status_tag=importance_status_tag,)
+                                        importance_status_tag=importance_status_tag,
+                                        user=user)
             # Дополнительные действия, например, перенаправление на другую страницу
             return redirect('note-creation:note_creation')
     else:

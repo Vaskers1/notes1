@@ -1,7 +1,7 @@
 from django import template
 
-import users
-from notes_main.models import Notes, User
+
+from notes_main.models import Notes
 
 register = template.Library()
 

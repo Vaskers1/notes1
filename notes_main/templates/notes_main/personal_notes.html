@@ -7,7 +7,9 @@
 <div class="content">
             <button class="prev" id="prevNote">&#10094;</button>
             {% get_notes as notes %}
+            {% get_users as users %}
             {% for note in notes %}
+                {% if request.user.is_authenticated and note.user == request.user %}
                 {% if note.group is None %}
                 <div class="notes personal-note">
                     <div class="note">
@@ -21,12 +23,12 @@
                         <div class="meta">
                             <p>{{ note.note_creation_date }}</p>
                             <p>{{ note.note_refresh_date }}</p>
-                            {% get_users as users %}
-                                <p>{{ user.username }}</p>
+                            <p>{{ note.user.username }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="note-pair"></div>
+                {% endif %}
                 {% endif %}
             {% endfor %}
             <button class="next" id="nextNote">&#10095;</button>

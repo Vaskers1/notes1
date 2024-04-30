@@ -1,0 +1,10 @@
+{% extends 'notes_main/base.html' %}
+{% load static %}
+
+{% block group_creation %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button type="submit">Создать группу</button>
+    </form>
+{% endblock %}

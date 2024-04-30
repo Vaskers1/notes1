@@ -2,8 +2,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-
-from users.forms import UserRegistrationForm, UserLoginForm
+from users.forms import UserRegistrationForm, UserLoginForm, GroupForm
 
 
 def user_registration(request):
@@ -40,5 +39,13 @@ def logout(request):
     return redirect('notes_main:index')
 
 
-
-
+@login_required
+def create_group(request):
+    if request.method == 'POST':
+        form = GroupForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('notes_main:group_notes')
+    else:
+        form = GroupForm()
+    return render(request, 'users/group_creation.html', {'form': form})
