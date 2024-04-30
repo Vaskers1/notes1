@@ -20,7 +20,7 @@ class User(AbstractUser):
 class Group(models.Model):
     group_name = models.CharField(max_length=100, verbose_name='Название группы', unique=True, null=False)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='group_creation', verbose_name='Создатель',
-                                null=True)
+                                null=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

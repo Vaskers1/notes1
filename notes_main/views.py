@@ -7,6 +7,7 @@ from notes_main.forms import NoteForm
 from notes_main.models import Notes
 
 
+
 def index(request):
     return render(request, '../templates/notes_main/base.html')
 

@@ -27,7 +27,7 @@ class Notes(models.Model):
     completion_status_tag = models.CharField(choices=completion_status, verbose_name='Статус завершения', blank=True,
                                              null=True)
     importance_status_tag = models.CharField(choices=importance_status, verbose_name='Важность', blank=True, null=False)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name='Группа', related_name='notes', blank=True,
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name='Группа', related_name='notes',
                               null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', related_name='notes',
                              null=False)
@@ -44,3 +44,4 @@ class Notes(models.Model):
 
     def get_importance_status_tag_display(self):
         return dict(self.importance_status)[self.importance_status_tag]
+
