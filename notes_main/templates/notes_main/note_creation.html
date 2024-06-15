@@ -28,6 +28,15 @@
                             <option value="{{ status_key }}">{{ status_value }}</option>
                         {% endfor %}
                     </select>
+                    {% get_groups as groups %}
+                    {% if groups %}
+                        <label for="user-groups">Выберите группу:</label>
+                        <select id="user-groups" name="user-groups">
+                        {% for group in groups %}
+                            <option value="{{ group.id }}">{{ group.group_name }}</option>
+                        {% endfor %}
+                        </select>
+                    {% endif %}
                 </div>
             </div>
             <button type="submit">Создать заметку</button>

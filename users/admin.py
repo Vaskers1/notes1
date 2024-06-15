@@ -1,7 +1,10 @@
 from django.contrib import admin
 # Register your models here.
-from users.models import User, Group, UserGroup
+from users.models import User, Group
 
 admin.site.register(User)
 admin.site.register(Group)
-admin.site.register(UserGroup)
+
+
+class UserLevelAdmin(admin.ModelAdmin):
+    list_display = 'user_id'

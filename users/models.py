@@ -7,6 +7,7 @@ from django.dispatch import receiver
 
 
 class User(AbstractUser):
+    user_id = models.AutoField(primary_key=True)
     avatar = models.ImageField("Аватар пользователя", upload_to='users/images/')
 
     class Meta:
@@ -19,8 +20,8 @@ class User(AbstractUser):
 
 class Group(models.Model):
     group_name = models.CharField(max_length=100, verbose_name='Название группы', unique=True, null=False)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='group_creation', verbose_name='Создатель',
-                                null=False)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='group_creation',
+                                verbose_name='Создатель', null=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -29,22 +30,3 @@ class Group(models.Model):
     class Meta:
         verbose_name = "Группа"
         verbose_name_plural = "Группы"
-
-
-class UserGroup(models.Model):
-    ROLES = (
-        ('Member', 'Член группы'),
-        ('Administrator', 'Администратор группы'),
-    )
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    joined_at = models.DateTimeField(auto_now_add=True)
-    role = models.CharField(max_length=100, choices=ROLES, default='Member')
-
-    class Meta:
-        unique_together = ['user', 'group']
-
-    def get_roles(self):
-        return dict(self.ROLES)[self.role]
-

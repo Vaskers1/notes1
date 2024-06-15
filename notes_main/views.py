@@ -5,6 +5,7 @@ from django.utils.functional import SimpleLazyObject
 # Create your views here.
 from notes_main.forms import NoteForm
 from notes_main.models import Notes
+from users.forms import GroupForm
 
 
 
@@ -31,12 +32,16 @@ def note_creation(request):
             completion_status_tag = form.cleaned_data['completion_status_tag']
             importance_status_tag = form.cleaned_data['importance_status_tag']
             user = request.user
+            group = form.cleaned_data['group']
             note = Notes.objects.create(note_title=note_title, note_text=note_text,
                                         completion_status_tag=completion_status_tag,
                                         importance_status_tag=importance_status_tag,
-                                        user=user)
+                                        user=user, group=group)
             # Дополнительные действия, например, перенаправление на другую страницу
             return redirect('note-creation:note_creation')
     else:
         form = NoteForm()
     return render(request, 'notes_main/note_creation.html', {'form': form})
+
+
+
