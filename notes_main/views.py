@@ -25,14 +25,14 @@ def group_notes(request):
 @login_required
 def note_creation(request):
     if request.method == 'POST':
-        form = NoteForm(request.POST)
-        if form.is_valid():
-            note_title = form.cleaned_data['note_title']
-            note_text = form.cleaned_data['note_text']
-            completion_status_tag = form.cleaned_data['completion_status_tag']
-            importance_status_tag = form.cleaned_data['importance_status_tag']
+        note_form = NoteForm(request.POST)
+        if note_form.is_valid():
+            note_title = note_form.cleaned_data['note_title']
+            note_text = note_form.cleaned_data['note_text']
+            completion_status_tag = note_form.cleaned_data['completion_status_tag']
+            importance_status_tag = note_form.cleaned_data['importance_status_tag']
             user = request.user
-            group = form.cleaned_data['group']
+            group = note_form.cleaned_data['group']
             note = Notes.objects.create(note_title=note_title, note_text=note_text,
                                         completion_status_tag=completion_status_tag,
                                         importance_status_tag=importance_status_tag,
@@ -40,8 +40,8 @@ def note_creation(request):
             # Дополнительные действия, например, перенаправление на другую страницу
             return redirect('note-creation:note_creation')
     else:
-        form = NoteForm()
-    return render(request, 'notes_main/note_creation.html', {'form': form})
+        note_form = NoteForm()
+    return render(request, 'notes_main/note_creation.html', {'note_form': note_form})
 
 
 

@@ -34,7 +34,8 @@ class UserLoginForm(AuthenticationForm):
 
 
 class GroupForm(forms.ModelForm):
+    group_name = forms.ModelChoiceField(queryset=Group.objects.all(), empty_label='Выберите группу')
+
     class Meta:
         model = Group
         fields = ['group_name']
-
