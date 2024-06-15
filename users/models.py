@@ -31,11 +31,6 @@ class Group(models.Model):
         verbose_name_plural = "Группы"
 
 
-def assign_creator_as_admin(sender, instance, created, **kwargs):
-    if created:
-        UserGroup.objects.create(user=instance.creator, group=instance, role='Administrator')
-
-
 class UserGroup(models.Model):
     ROLES = (
         ('Member', 'Член группы'),
@@ -45,13 +40,11 @@ class UserGroup(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     joined_at = models.DateTimeField(auto_now_add=True)
-    role = models.CharField(max_length=100, choices=ROLES, default='member')
+    role = models.CharField(max_length=100, choices=ROLES, default='Member')
 
     class Meta:
         unique_together = ['user', 'group']
 
-    def get_completion_status_tag_display(self):
+    def get_roles(self):
         return dict(self.ROLES)[self.role]
 
-    def get_importance_status_tag_display(self):
-        return dict(self.ROLES)[self.role]
